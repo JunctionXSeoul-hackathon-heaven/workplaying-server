@@ -1,4 +1,4 @@
-package com.example.workplay.Config
+package com.example.workplay.config
 
 import com.example.workplay.database.WorkplayDatabase
 import org.springframework.context.annotation.Bean
