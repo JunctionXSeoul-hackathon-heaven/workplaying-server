@@ -1,5 +1,6 @@
 package com.example.workplay.model.http
 
+import com.example.workplay.database.Company
 import com.example.workplay.database.Competition
 import com.example.workplay.database.User
 import com.example.workplay.utils.strToDate
@@ -27,6 +28,7 @@ data class CompetitionDto(
     @field:NotBlank
     var gameCategory: String? = null,
 
+    var host: Company? = null,
     var description: String? = null,
     var users: MutableList<User>? = null,
     var createdAt: LocalDateTime? = null,
@@ -53,6 +55,7 @@ fun Competition.convertCompetition(competitionDto: CompetitionDto): Competition 
         this.endDate = competitionDto.endDate?.strToDate()
         this.gameCategory = competitionDto.gameCategory
         this.description = competitionDto.description
+        this.host = competitionDto.host
         this.users = competitionDto.users
         this.createdAt = competitionDto.createdAt
         this.updatedAt = competitionDto.updatedAt
@@ -68,6 +71,7 @@ fun CompetitionDto.convertCompetitionDto(competition: Competition): CompetitionD
         this.endDate = competition.endDate?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
         this.gameCategory = competition.gameCategory
         this.description = competition.description
+        this.host = competition.host
         this.users = competition.users
         this.createdAt = competition.createdAt
         this.updatedAt = competition.updatedAt

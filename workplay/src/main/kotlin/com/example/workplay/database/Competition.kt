@@ -10,6 +10,7 @@ data class Competition(
     var endDate: LocalDateTime? = null,
     var gameCategory: String? = null,
     var description: String? = null,
+    var host: Company? = null,
     var users: MutableList<User>? = null,
     var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null
