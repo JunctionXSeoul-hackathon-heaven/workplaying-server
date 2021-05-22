@@ -13,6 +13,17 @@ import javax.validation.Valid
 class WorkplayApiController(
     val workplayService: WorkplayService
 ) {
+//    @GetMapping(path=["/user"])
+//    fun readUser(@RequestParam index:Int): UserDto? {
+//        return workplayService.readUser(index)
+//    }
+//
+//    @GetMapping(path=["/user/all"])
+//    fun readUserAll(): MutableList<UserDto> {
+//        return workplayService.readAllUser()
+//    }
+
+
     // user CRUD
     @GetMapping(path=["/user"])
     fun readUser(@RequestParam(required=false) index:Int?): Any? {
@@ -27,7 +38,7 @@ class WorkplayApiController(
     }
 
     @PutMapping(path=["/user"])
-    fun updateUser(@Valid @RequestBody userDto: UserDto): UserDto {
+    fun updateUser(@Valid @RequestBody userDto: UserDto): UserDto? {
         return workplayService.updateUser(userDto)
     }
 
@@ -59,7 +70,7 @@ class WorkplayApiController(
     }
 
     @PutMapping(path=["/competition"])
-    fun updateCompetition(@Valid @RequestBody competitionDto: CompetitionDto): CompetitionDto {
+    fun updateCompetition(@Valid @RequestBody competitionDto: CompetitionDto): CompetitionDto? {
         return workplayService.updateCompetition(competitionDto)
     }
 
@@ -85,7 +96,7 @@ class WorkplayApiController(
     }
 
     @PutMapping(path=["/company"])
-    fun updateCompany(@Valid @RequestBody companyDto: CompanyDto): CompanyDto {
+    fun updateCompany(@Valid @RequestBody companyDto: CompanyDto): CompanyDto? {
         return workplayService.updateCompany(companyDto)
     }
 

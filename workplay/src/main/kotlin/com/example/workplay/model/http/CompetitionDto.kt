@@ -4,12 +4,16 @@ import com.example.workplay.database.Company
 import com.example.workplay.database.Competition
 import com.example.workplay.database.User
 import com.example.workplay.utils.strToDate
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.validation.constraints.AssertTrue
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Positive
 
+
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class CompetitionDto(
     var id: Int? =null,
 

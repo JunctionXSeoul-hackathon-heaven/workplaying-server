@@ -2,10 +2,13 @@ package com.example.workplay.model.http
 
 import com.example.workplay.database.Competition
 import com.example.workplay.database.User
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 import java.time.LocalDateTime
 import javax.validation.constraints.AssertTrue
 import javax.validation.constraints.NotBlank
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class UserDto(
     var id: Int? = null,
 

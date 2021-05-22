@@ -2,8 +2,11 @@ package com.example.workplay.model.http
 
 import com.example.workplay.database.Company
 import com.example.workplay.database.Competition
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 import java.time.LocalDateTime
 
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class CompanyDto(
     var id: Int? = null,
     var name: String? = null,

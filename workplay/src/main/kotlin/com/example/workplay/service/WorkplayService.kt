@@ -5,7 +5,9 @@ import com.example.workplay.database.Competition
 import com.example.workplay.database.User
 import com.example.workplay.model.http.*
 import com.example.workplay.repository.WorkplayRepository
+import org.springframework.stereotype.Service
 
+@Service
 class WorkplayService (
     val workplayRepository: WorkplayRepository
 ) {
@@ -15,7 +17,8 @@ class WorkplayService (
             workplayRepository.saveUser(
                 User().convertUser(it)
             )
-            userDto
+        }.let {
+            UserDto().convertUserDto(it)
         }
     }
     
@@ -35,12 +38,13 @@ class WorkplayService (
     }
     
     // user update
-    fun updateUser(userDto: UserDto): UserDto {
+    fun updateUser(userDto: UserDto): UserDto? {
         return userDto.let {
             workplayRepository.updateUser(
                 User().convertUser(it)
             )
-            userDto
+        }?.let {
+            UserDto().convertUserDto(it)
         }
     }
     
@@ -55,7 +59,8 @@ class WorkplayService (
             workplayRepository.saveCompetition(
                 Competition().convertCompetition(it)
             )
-            competitionDto
+        }.let {
+            CompetitionDto().convertCompetitionDto(it)
         }
     }
     
@@ -75,12 +80,13 @@ class WorkplayService (
     }
     
     // competition update
-    fun updateCompetition(competitionDto: CompetitionDto): CompetitionDto {
+    fun updateCompetition(competitionDto: CompetitionDto): CompetitionDto? {
         return competitionDto.let {
             workplayRepository.updateCompetition(
                 Competition().convertCompetition(it)
             )
-            competitionDto
+        }?.let {
+            CompetitionDto().convertCompetitionDto(it)
         }
     }
     
@@ -95,7 +101,8 @@ class WorkplayService (
             workplayRepository.saveCompany(
                 Company().convertCompany(it)
             )
-            companyDto
+        }.let {
+            CompanyDto().convertCompanyDto(it)
         }
     }
     
@@ -115,12 +122,13 @@ class WorkplayService (
     }
     
     // company update
-    fun updateCompany(companyDto: CompanyDto): CompanyDto {
+    fun updateCompany(companyDto: CompanyDto): CompanyDto? {
         return companyDto.let {
             workplayRepository.updateCompany(
                 Company().convertCompany(it)
             )
-            companyDto
+        }?.let {
+            CompanyDto().convertCompanyDto(it)
         }
     }
 
