@@ -24,10 +24,16 @@ class WorkplayRepository(
 
     override fun saveCompetition(competition: Competition): Competition {
         return competition.apply {
-            this.id = ++workplayDatabase.competitionIndex
+            val id = ++workplayDatabase.competitionIndex
+            this.id = id
             this.users = mutableListOf()
             this.createdAt = LocalDateTime.now()
             this.updatedAt = LocalDateTime.now()
+
+            workplayDatabase.companyList.forEach { company ->
+                if(company.name == competition.host)
+                    company.competitions?.add(id)
+            }
 
             workplayDatabase.competitionList.add(this)
         }
@@ -102,7 +108,34 @@ class WorkplayRepository(
         return workplayDatabase.companyList
     }
 
+    fun join(userId: Int, competitionId: Int): Boolean {
+        var user = findUserOne(userId)
+        var competition = findCompetitionOne(competitionId)
+
+        if (user != null && competition != null) {
+            user.competitions?.add(userId)
+            competition.users?.add(competitionId)
+            return true
+        }
+
+        return false
+    }
+
+    fun cancel(userId: Int, competitionId: Int): Boolean {
+        var user = findUserOne(userId)
+        var competition = findCompetitionOne(competitionId)
+
+        if (user != null && competition != null) {
+            user.competitions?.remove(userId)
+            competition.users?.remove(competitionId)
+            return true
+        }
+
+        return false
+    }
+
     override fun updateUser(user: User): User? {
+        println(user)
         return user.id?.let {
             findUserOne(it)?.apply {
                 this.name = user.name

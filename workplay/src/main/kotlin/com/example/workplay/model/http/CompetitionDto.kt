@@ -4,6 +4,7 @@ import com.example.workplay.database.Company
 import com.example.workplay.database.Competition
 import com.example.workplay.database.User
 import com.example.workplay.utils.strToDate
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import java.time.LocalDateTime
@@ -30,19 +31,29 @@ data class CompetitionDto(
     var endDate: String? = null,
 
     @field:NotBlank
+    @JsonProperty("game_category")
     var gameCategory: String? = null,
 
-    var host: Company? = null,
+    var host: String? = null,
     var description: String? = null,
-    var users: MutableList<User>? = null,
+    var users: MutableList<Int>? = null,
     var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null
 ) {
     @AssertTrue(message="yyyy-MM-dd HH:mm:ss 포맷이 맞지 않습니다.")
-    fun validDateTime(): Boolean {
+    fun validStartDate(): Boolean {
         return try {
-            startDate?.strToDate()
-            endDate?.strToDate()
+            LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            true
+        }catch (e: Exception) {
+            false
+        }
+    }
+
+    @AssertTrue(message="yyyy-MM-dd HH:mm:ss 포맷이 맞지 않습니다.")
+    fun validEndDate(): Boolean {
+        return try {
+            LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
             true
         }catch (e: Exception) {
             false

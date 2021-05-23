@@ -20,6 +20,7 @@ class WorkplayApiControllerAdvice {
         e: MethodArgumentNotValidException,
         request: HttpServletRequest
     ): ResponseEntity<ErrorResponse> {
+        println("[DEBUG] 잘못된 요청으로 핸들러가 작동합니다.")
 
         val errors = mutableListOf<Error>()
 

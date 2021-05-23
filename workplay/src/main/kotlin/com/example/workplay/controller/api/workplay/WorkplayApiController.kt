@@ -26,7 +26,7 @@ class WorkplayApiController(
 
     // user CRUD
     @GetMapping(path=["/user"])
-    fun readUser(@RequestParam(required=false) index:Int?): Any? {
+    fun readUser(@RequestParam(required=false, name="id") index:Int?): Any? {
         if(index == null)
             return workplayService.readAllUser()
         return workplayService.readUser(index)
@@ -39,6 +39,7 @@ class WorkplayApiController(
 
     @PutMapping(path=["/user"])
     fun updateUser(@Valid @RequestBody userDto: UserDto): UserDto? {
+        println(userDto)
         return workplayService.updateUser(userDto)
     }
 
@@ -51,14 +52,27 @@ class WorkplayApiController(
     }
 
     // join
+    @PostMapping(path=["/join/user/{userId}/competition/{competitionId}"])
+    fun joinCompetition(
+        @PathVariable userId: Int,
+        @PathVariable competitionId: Int
+    ): Boolean {
+        return workplayService.join(userId, competitionId)
+    }
 
 
     // cancel
-
+    @PostMapping(path=["/cancel/user/{userId}/competition/{competitionId}"])
+    fun cancelCompetition(
+        @PathVariable userId: Int,
+        @PathVariable competitionId: Int
+    ): Boolean {
+        return workplayService.cancel(userId, competitionId)
+    }
 
     // competition CRUD
     @GetMapping(path=["/competition"])
-    fun readCompetition(@RequestParam(required=false) index:Int?): Any? {
+    fun readCompetition(@RequestParam(required=false, name="id") index:Int?): Any? {
         if(index == null)
             return workplayService.readAllCompetition()
         return workplayService.readCompetition(index)
@@ -84,7 +98,7 @@ class WorkplayApiController(
 
     // Company CRUD
     @GetMapping(path=["/company"])
-    fun readCompany(@RequestParam(required=false) index:Int?): Any? {
+    fun readCompany(@RequestParam(required=false, name="id") index:Int?): Any? {
         if(index == null)
             return workplayService.readAllCompany()
         return workplayService.readCompany(index)

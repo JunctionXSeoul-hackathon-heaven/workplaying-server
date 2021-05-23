@@ -18,7 +18,7 @@ data class UserDto(
     @field:NotBlank
     var company: String? = null,
 
-    var competitions: MutableList<Competition>? = null,
+    var competitions: MutableList<Int>? = null,
 
     var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null

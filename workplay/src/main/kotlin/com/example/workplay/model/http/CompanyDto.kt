@@ -5,13 +5,17 @@ import com.example.workplay.database.Competition
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 import java.time.LocalDateTime
+import javax.validation.constraints.NotBlank
 
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy::class)
 data class CompanyDto(
     var id: Int? = null,
+
+    @field:NotBlank
     var name: String? = null,
+
     var logo: String? = null,
-    var competitions: MutableList<Competition>? = null,
+    var competitions: MutableList<Int>? = null,
     var createdAt: LocalDateTime? = null,
     var updatedAt: LocalDateTime? = null
 )

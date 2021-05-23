@@ -39,6 +39,7 @@ class WorkplayService (
     
     // user update
     fun updateUser(userDto: UserDto): UserDto? {
+        println(userDto)
         return userDto.let {
             workplayRepository.updateUser(
                 User().convertUser(it)
@@ -46,6 +47,14 @@ class WorkplayService (
         }?.let {
             UserDto().convertUserDto(it)
         }
+    }
+
+    fun join(userId: Int, competitionId: Int): Boolean {
+        return workplayRepository.join(userId, competitionId)
+    }
+
+    fun cancel(userId: Int, competitionId: Int): Boolean {
+        return workplayRepository.cancel(userId, competitionId)
     }
     
     // user delete
