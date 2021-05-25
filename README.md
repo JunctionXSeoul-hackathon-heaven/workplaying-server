@@ -8,7 +8,7 @@ This Project is a Company Game Competition Platform.
 
 A few resources to get you started if this is your first kotlin spring boot project:
 
-- [Guide](https://spring.io/guides/tutorials/spring-boot-kotlin/)
+- [Spring Boot Guide](https://spring.io/guides/tutorials/spring-boot-kotlin/)
 
 ## REST API
 - User CRUD [GET, POST, PUT, DELETE] /api/user
